@@ -1,24 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useRef, useState } from "react";
+import "./App.css";
+import { Form, Button, Modal, ProgressBar, Navbar, Nav } from "react-bootstrap";
+import { Routes, Route, Link, NavLink } from "react-router-dom";
+import Totals from "./components/Totals";
+import FormInput from "./components/FormInput";
+import Signup from "./components/Signup";
+import Signin from "./components/Signin";
+import Profile from "./components/Profile";
+import { FoodTrackerProvider } from "./context/FoodTrackerContext";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <FoodTrackerProvider>
+        <Navbar id="navbar" className="sticky-top">
+          <Nav>
+            <Nav.Link as={NavLink} to="/profile">
+              Profile
+            </Nav.Link>
+            <Nav.Link as={NavLink} to="/add">
+              Add
+            </Nav.Link>
+            <Nav.Link as={NavLink} to="/totals">
+              Totals
+            </Nav.Link>
+          </Nav>
+        </Navbar>
+
+        <Routes>
+          <Route path="/" element={<Signup />} />
+          <Route path="/signin" element={<Signin />} />
+          <Route path="/totals" element={<Totals />} />
+          <Route path="/add" element={<FormInput />} />
+          <Route path="/profile" element={<Profile />} />
+        </Routes>
+      </FoodTrackerProvider>
+    </>
   );
 }
 
